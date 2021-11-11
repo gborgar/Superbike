@@ -5,10 +5,10 @@ class Game {
     this.running = false;
     this.tick = 0 
     this.background = new Background(this.ctx);
+    this.biker = new Biker(this.ctx);
   }
 
   start() {
-    console.log("enter here");
     this.running = true;
 
     this.intervalId = setInterval(() => {
@@ -17,6 +17,20 @@ class Game {
 
       this.background.draw();
       this.background.move();
-    })
+
+      this.biker.draw();
+      this.biker.move();
+
+    }, 1000 / 60);
+  }
+
+  onKeyDown(code) {
+    //Le pasamos el evento al biker
+    this.biker.onKeyDown(code);
+  }
+
+  onKeyUp(code) {
+    //Le pasamos el evento al biker
+    this.biker.onKeyUp(code);
   }
 }

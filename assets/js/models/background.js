@@ -9,15 +9,16 @@ class Background {
       this.h = this.ctx.canvas.height
       this.w = this.ctx.canvas.width
   
-      this.vx = -1
+      this.vx = -2
   
       this.img = new Image()
       this.img.src = 'assets/img/backgroundBeach.jpeg';
     }
   
     draw() {
-        //TODO añadir parámetros para pintar la imagen (¡ 2 veces !)
-        console.log("img:: ", this.img.src);
+        //Con esto añadimos los parametros para que la imagen se pinte 2 veces,
+        //una seguida de la otra
+
         this.ctx.drawImage(this.img, this.x, this.y, this.w, this.h);
         this.ctx.drawImage(this.img, this.x + this.w, this.y, this.w, this.h);
     }
@@ -26,7 +27,7 @@ class Background {
       this.x += this.vx
   
       if (this.x <= -this.w) {
-        //TODO resetear la posición del background
+        //Con esto reseteamos la posición del background
         this.x = 0;
       }
     }
