@@ -63,7 +63,7 @@ class Biker {
     }
 
     if (code === DOWN_KEY) {
-      (this.x + this.h) / 2;
+      (this.y + this.h) / 2;
     }
   }
 
