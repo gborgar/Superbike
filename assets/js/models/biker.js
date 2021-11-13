@@ -8,11 +8,27 @@ class Biker {
     this.vx = 0;
     this.vy = 2; 
     this.ay = 1;
+
+    this.img = new Image();
+    this.img.drawCount = 0;
+    this.img.frames = 4;
+    this.img.frameIndex = 0;
+    this.img.src = 'assets/img/biker1';
   }
 
   draw() {
+    this.img.drawCount++
+
     //Indico que se dibuje el rectángulo con los parametros indicados.
-    this.ctx.fillRect(this.x, this.y, this.w, this.h);
+    this.ctx.drawImage(
+      this.img,
+      this.img.frameIndex * this.img.width / this.img.frames, 0,
+      this.img.width / 4,
+      this.img.height,
+      this.y,
+      this.w,
+      this.h
+    );
   }
 
   move() {
@@ -36,11 +52,17 @@ class Biker {
     }
 
     //Si toca el suelo del canvas
-    if (this.y + this.h >= this.ctx.canvas.height) {
-      this.y = this.ctx.canvas.height - this.h;
+    if (this.y + this.h >= this.ctx.canvas.height -30) {
+      //this.y = this.ctx.canvas.height - this.h;
       //this.vy = -this.vy;
       this.vy = 0;
     }
+    // this.y += this.vy;
+    // this.x += this.vx;
+
+    // if (this.y + this.h >= this.ctx.canvas.height - 30) {
+    //   this.vx = -2
+    //   this.vy = 0;
 
     //Si toca el techo del canvas
     if (this.y <= 0) {

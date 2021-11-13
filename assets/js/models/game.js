@@ -14,7 +14,7 @@ class Game {
 
     this.intervalId = setInterval(() => {
       this.tick++
-      //this.clear();
+      this.clear();
 
       this.background.draw();
       this.background.move();
@@ -32,13 +32,22 @@ class Game {
         this.tick = 0;
 
         //Creamos nuevos obstaculos "cocos" de forma aleatoria desde X
-        const newObstacle = new Obstacle(this.ctx, Math.ramdom() * this.ctx.canvas.width);
+        const newObstacle = new Obstacle(this.ctx, Math.random() * this.ctx.canvas.width);
 
         //Pusheamos el nuevo obstaculo al array de obstáculos
         this.obstacles.push(newObstacle);
       }
 
     }, 1000 / 60);
+  }
+  
+  stop() {
+    this.running = false;
+    clearInterval(this.intervalId);
+  }
+
+  clear() {
+    this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
   }
 
   onKeyDown(code) {

@@ -1,12 +1,12 @@
-class Obstacles {
+class Obstacle {
   constructor(ctx, x) {
     this.ctx = ctx;
     this.x = x;
-    this.y = -20;
-    this.w = 10;
-    this.h = 10;
+    this.y = 120;
+    this.w = 25;
+    this.h = 25;
     this.vx = 0;
-    this.vy = 2;
+    this.vy = 4;
     this.ay = 1;
 
     this.img = new Image();
@@ -22,5 +22,11 @@ class Obstacles {
 
   move() {
     this.y += this.vy;
+    this.x += this.vx;
+
+    if (this.y + this.h >= this.ctx.canvas.height - 30) {
+      this.vx = -2
+      this.vy = 0;
+    }
   }
 }
