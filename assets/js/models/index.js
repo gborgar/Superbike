@@ -11,7 +11,7 @@ document.addEventListener("keyup", (event) => {
   game.onKeyUp(event.keyCode);
 });
 
-document.addEventListener("click", (event) => {
+startButton.addEventListener("click", (event) => {
   game.start();
   startButton.remove()
 });
