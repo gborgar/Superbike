@@ -3,12 +3,12 @@ class Obstacle {
     this.ctx = ctx;
     this.x = x;
     this.y = 120;
-    this.w = 25;
-    this.h = 25;
+    this.w = 22;
+    this.h = 22;
     this.vx = 0;
     this.vy = 16;
     this.ay = 0;
-
+    this.hitted = false;
     this.img = new Image();
     this.img.frames = 1;
     this.img.frameIndex = 0;
@@ -24,7 +24,7 @@ class Obstacle {
     this.y += this.vy;
     this.x += this.vx;
 
-    if (this.y + this.h >= this.ctx.canvas.height - 31) {
+    if (this.y + this.h >= this.ctx.canvas.height - 35) {
       this.vx = -2
       this.vy = 0;
     }
