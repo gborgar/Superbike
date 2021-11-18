@@ -1,7 +1,7 @@
 const canvas = document.querySelector("canvas");
 
 const game = new Game(canvas);
-const startButton = document.querySelector("#start");
+const startButton = document.querySelector("#game-intro");
 
 document.addEventListener("keydown", (event) => {
   game.onKeyDown(event.keyCode);

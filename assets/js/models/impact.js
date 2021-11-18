@@ -3,7 +3,9 @@ class Impact {
     this.ctx = ctx;
     this.x = x;
     this.y = y;
-    
+    this.h = 70;
+    this.w = 70;
+    this.done = false;
 
     this.img = new Image();
     this.img.frames = 1;
@@ -12,8 +14,6 @@ class Impact {
   }
 
   draw() {
-    //Indicamos los parametros para dibujar los impactos
-    this.ctx.drawImage(this.img, this.x, this.y, this.w, this.h);
-    
+    this.ctx.drawImage(this.img, this.x, this.y, this.w, this.h);    
   }
 }

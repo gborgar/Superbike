@@ -1,7 +1,8 @@
 class Biker {
-  constructor(ctx) {
+  constructor(ctx, health) {
     this.ctx = ctx;
     this.x = 100;
+    this.health = health;
     this.y = 230;
     this.w = 85;
     this.h = 70,
@@ -68,11 +69,11 @@ class Biker {
   onKeyDown(code) {
     //Le pasamos los eventos 
     if (code === RIGHT_KEY) {
-      this.vx = 10;
+      this.vx = 7;
     }
 
     if (code === LEFT_KEY) {
-      this.vx = -10;
+      this.vx = -7;
     }
 
     if (code === TOP_KEY && this.vy === 0) {
@@ -90,7 +91,7 @@ class Biker {
     }
   }
 
-  collidesWidth(element) {
+  collidesWith(element) {
     return this.x < element.x + element.w &&
       this.x + this.w > element.x &&
       this.y < element.y + element.h &&
