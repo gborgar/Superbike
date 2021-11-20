@@ -5,8 +5,9 @@ class Splash {
       this.y = y;
       this.h = 35;
       this.w = 78;
+      this.vx = -2;
       
-    this.done = false
+      this.done = false
       this.img = new Image();
       this.img.frames = 1;
       this.img.frameIndex = 0;
@@ -17,5 +18,9 @@ class Splash {
       //Indicamos los parametros para dibujar los splash
       this.ctx.drawImage(this.img, this.x, this.y, this.w, this.h);
       
+    }
+
+    move() {
+      this.x += this.vx;
     }
   }

@@ -9,6 +9,7 @@ class Obstacle {
     this.vy = 16;
     this.ay = 0;
     this.hitted = false;
+    this.crashSound = new Audio("assets/sounds/impact-sound.mp3");
     this.img = new Image();
     this.img.frames = 1;
     this.img.frameIndex = 0;
@@ -28,5 +29,10 @@ class Obstacle {
       this.vx = -2
       this.vy = 0;
     }
+  }
+
+  crash() {
+    this.hitted = true;
+    this.crashSound.play();
   }
 }

@@ -13,5 +13,6 @@ document.addEventListener("keyup", (event) => {
 
 startButton.addEventListener("click", (event) => {
   game.start();
-  startButton.remove()
+  startButton.remove();
+  
 });

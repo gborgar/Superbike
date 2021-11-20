@@ -8,7 +8,8 @@ class Gas {
     this.vx = 0;
     this.vy = 0;
     this.ay = 0;
-
+		this.hitted = false;
+		this.rechargeSound = new Audio("assets/sounds/recharge-sound.wav");
     this.img = new Image();
     this.img.frames = 1;
     this.img.frameIndex = 0;
@@ -28,5 +29,10 @@ class Gas {
       this.vx = -6
       this.vy = 0;
     }
+  }
+
+	charge() {
+    this.hitted = true;
+    this.rechargeSound.play();
   }
 }

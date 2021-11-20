@@ -9,7 +9,7 @@ class Water {
     this.vy = 0;
     this.ay = 0;
     this.hitted = false;
-
+    this.splashSound = new Audio("assets/sounds/splash-sound.mp3")
     this.img = new Image();
     this.img.frames = 1;
     this.img.frameIndex = 0;
@@ -29,5 +29,10 @@ class Water {
       this.vx = -2
       this.vy = 0;
     }
+  }
+
+  splash() {
+    this.hitted = true;
+    this.splashSound.play();
   }
 }

@@ -21,7 +21,7 @@ canvas {
   background-position: left;
   background-repeat: no-repeat;
   background-size: cover;
-  justify-content: right;
+  align-items: center;
 
 }
 
@@ -29,4 +29,10 @@ canvas {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+#health-bar {
+  width: 400px;
+  height: 60px;
+  background-color: red;
 }
