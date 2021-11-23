@@ -3,25 +3,41 @@ canvas {
 }
 
 #start {
-  
+  display: flex;
   font-style: italic;
   font-family: coppeplate;
   font-size: 40px;
   color: peru;
   border-radius: 5px;
   border-color: peru;
+  margin-left: 120px;
+}
+
+#instructions {
+  display: flex;
+  font-style: italic;
+  font-family: coppeplate;
+  font-size: 40px;
+  color: peru;
+  border-radius: 5px;
+  border-color: peru;
+  margin-top: 15px;
+  margin-left: 120px;
 }
 
 #game-intro {
   display: flex;
   position: absolute;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: 700px;
   height: 400px;
   background: url('../img/backgroundBeach.jpeg');
-  background-position: left;
+  /*background-position: left;
   background-repeat: no-repeat;
   background-size: cover;
-  align-items: center;
+  align-items: center;*/
 
 }
 
@@ -31,8 +47,64 @@ canvas {
   justify-content: center;
 }
 
-#health-bar {
-  width: 400px;
-  height: 60px;
-  background-color: red;
+.health-container {
+  position: absolute;
+  top: 20px;
+  width: 20px;
+  height: 20px;
+  display: none;
+}
+
+#life {
+  width: 30px;
+  height: 30px;
+}
+
+.health {
+  text-align: center;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: bold;
+  font-style: italic;
+}
+
+#game-winner {
+  display: none;
+  position: absolute;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 700px;
+  height: 400px;
+  /*display: none;
+  /*font-style: italic;
+  position: absolute;
+  font-family: coppeplate;
+  font-size: 40px;
+  color: peru;
+  border-radius: 5px;
+  border-color: peru;
+  right: 520px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;*/
+  
+}
+#winner {
+  font-style: italic;
+  font-family: coppeplate;
+  font-size: 40px;
+  color: peru;
+  border-radius: 5px;
+  border-color: peru;
+  margin-top: 15px;
+  animation: maquina 3s infinite alternate;
+}
+
+@keyframes maquina {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0;
+  }
 }

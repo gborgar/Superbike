@@ -20,7 +20,7 @@ class Biker {
   draw() {
     this.img.drawCount++
 
-    //Indico que se dibuje el rectángulo con los parametros indicados.
+    //Indico que se dibuje el biker con los parametros indicados.
     this.ctx.drawImage(
       this.img,
       this.img.frameIndex * this.img.width / this.img.frames,

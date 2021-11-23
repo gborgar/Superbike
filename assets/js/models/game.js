@@ -19,20 +19,25 @@ class Game {
     this.puddlesWater = [];
     this.splashing = [];
     this.splashes = [];
-    this.lifes = 10
+    this.lifes = 10;
+    this.cont = 0;
 
     this.backgroundSound = new Audio("assets/sounds/background-sound.mp3");
-    this.backgroundSound.volume = 0.1;
-    
+    this.backgroundSound.volume = 0.1;  
+
+    this.gameOver = new GameOver(this.ctx);
+
+
   }
   /*---------------------------------------------------------------------------------*/
   //Iniciamos el juego
   start() {
-    this.healthBar.style.width = this.lifes * 100
-    console.log(this.healthBar.clientWidth)
+    //this.healthBar.style.width = this.lifes * 100
+    //console.log(this.healthBar.clientWidth)
     this.running = true;
-    this.backgroundSound.play();
+    this.initiateHealth();    
 
+    this.backgroundSound.play();
     this.intervalId = setInterval(() => {
       this.tick++
       this.clear();
@@ -51,7 +56,7 @@ class Game {
       this.puddlesWater.forEach(puddle => {
         puddle.draw();
         puddle.move();
-      })
+      });
       //this.splash.draw()
 
       // this.splashing.forEach(splash => {
@@ -76,11 +81,11 @@ class Game {
       this.gasolineGallons.forEach(gallon => {
         gallon.draw();
         gallon.move();
-      })
+      });
 
       this.recharges.forEach(recharge => {
         recharge.draw();
-      })
+      });
 
       if (this.tick % 1900 === 0) {
       
@@ -93,19 +98,20 @@ class Game {
     
 
       /*---------------------------------------------------------------------------------*/
-      this.obstacles = this.obstacles.filter(obstacle => obstacle.hitted === false);
-      this.impacts = this.impacts.filter(impact => impact.done === false);
+      this.obstacles = this.obstacles.filter(obstacle => obstacle.hitted === false);   
       this.splashes = this.splashes.filter(splash => splash.done === false);
+      this.gasolineGallons = this.gasolineGallons.filter(galon => galon.hitted === false);
+      this.impacts = this.impacts.filter(impact => impact.done === false);
 
       //Dibujamos y movemos los cocos
       this.obstacles.forEach(obstacle => {
         obstacle.draw();
         obstacle.move();
-      })
+      });
 
       this.impacts.forEach(impact => {
         impact.draw();
-      })
+      });
 
 
       if (this.tick % 100 === 0) {
@@ -116,6 +122,7 @@ class Game {
 
         //Pusheamos el nuevo obstaculo "coco" al array de obstáculos
         this.obstacles.push(newObstacle);
+        this.cont+=1;
       }
 
 
@@ -152,30 +159,33 @@ class Game {
 
   /*---------------------------------------------------------------------------------*/
   checkCollitions() {
-  
+    if (this.cont === 10 && this.health !== 0) {
+      this.stop();
+      document.querySelector("#game-winner").style.display = "flex";
+      console.log("Winner...");
+    }
+    console.log("obtacles:: "+ this.cont);
     this.obstacles.forEach(obstacle => {
       if (this.biker.collidesWith(obstacle)) {
-        //this.biker.health -=1;
+        this.decreaseHealth();
         obstacle.crash();
-        // una posicion en x del obstaculo -> obstacle.x
-        // una posicion en y del obstaculo -> obstacle.y
         const impact = new Impact(this.ctx, obstacle.x - 10, obstacle.y - 30);
         this.impacts.push(impact);
 
         setTimeout(() => {
           impact.done = true
-        }, 100)
-
-        console.log("health:: "+ this.biker.health);
-        // new Impact(this.ctx, x del obstaculo, y la y del obstaculo)
-      }
+        }, 100);
+      } 
     })
   }
 
   /*---------------------------------------------------------------------------------*/
   checkGallon() {
+    console.log("galons:: " + this.gasolineGallons.length);
     this.gasolineGallons.forEach(gallon => {
       if (this.biker.collidesWith(gallon)) {
+        console.log("collision");
+        this.increaseHealth();
         gallon.charge();
         const recharge = new Plus(this.ctx, gallon.x - 10, gallon.y - 20);
         this.recharges.push(recharge);
@@ -183,7 +193,7 @@ class Game {
         setTimeout(() => {
           recharge.done = true;
         }, 100)
-      }
+      } 
     })
   }
 
@@ -215,4 +225,40 @@ class Game {
     //Le pasamos el evento al biker
     this.biker.onKeyUp(code);
   }
-}
+
+  /*---------------------------------------------------------------------------------*/
+
+  decreaseHealth() {
+    const currentHealth = document.querySelector(".health");
+    if (this.biker.health >= 1) {
+      this.biker.health -= 1;
+      console.log("this.biker.health:: " + this.biker.health);
+    } else {
+      this.stop();
+      this.showGameOver();
+    }
+    currentHealth.innerText = this.biker.health;
+  }
+
+  increaseHealth() {
+    const currentHealth = document.querySelector(".health");
+    this.biker.health += 1;
+    console.log("this.biker.health:: " + this.biker.health);
+    currentHealth.innerText = this.biker.health;
+  }
+
+  initiateHealth() {
+    document.querySelector(".health-container").style.display = "block";
+    const currentHealth = document.querySelector(".health");
+    currentHealth.innerText = this.biker.health;
+  }
+
+  showGameOver() {
+    this.gameOver.draw();
+    this.gameOver.move();
+    document.querySelector(".health-container").style.display = "none";
+  }
+
+
+
+} 
