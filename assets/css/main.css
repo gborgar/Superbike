@@ -67,7 +67,7 @@ canvas {
   font-style: italic;
 }
 
-#game-winner {
+#game-winner, #game-over {
   display: none;
   position: absolute;
   flex-direction: column;
@@ -89,7 +89,7 @@ canvas {
   align-items: center;*/
   
 }
-#winner {
+#winner, #gameOver {
   font-style: italic;
   font-family: coppeplate;
   font-size: 40px;

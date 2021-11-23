@@ -159,12 +159,7 @@ class Game {
 
   /*---------------------------------------------------------------------------------*/
   checkCollitions() {
-    if (this.cont === 10 && this.health !== 0) {
-      this.stop();
-      document.querySelector("#game-winner").style.display = "flex";
-      console.log("Winner...");
-    }
-    console.log("obtacles:: "+ this.cont);
+    this.checkIfIsAWinner();
     this.obstacles.forEach(obstacle => {
       if (this.biker.collidesWith(obstacle)) {
         this.decreaseHealth();
@@ -181,10 +176,8 @@ class Game {
 
   /*---------------------------------------------------------------------------------*/
   checkGallon() {
-    console.log("galons:: " + this.gasolineGallons.length);
     this.gasolineGallons.forEach(gallon => {
       if (this.biker.collidesWith(gallon)) {
-        console.log("collision");
         this.increaseHealth();
         gallon.charge();
         const recharge = new Plus(this.ctx, gallon.x - 10, gallon.y - 20);
@@ -232,7 +225,6 @@ class Game {
     const currentHealth = document.querySelector(".health");
     if (this.biker.health >= 1) {
       this.biker.health -= 1;
-      console.log("this.biker.health:: " + this.biker.health);
     } else {
       this.stop();
       this.showGameOver();
@@ -254,11 +246,22 @@ class Game {
   }
 
   showGameOver() {
-    this.gameOver.draw();
-    this.gameOver.move();
-    document.querySelector(".health-container").style.display = "none";
+    document.querySelector("#game-over").style.display = "flex";
   }
 
+  checkIfIsAWinner() {
+    if (this.cont === 20 && this.health !== 0) {
+      this.stop();
+      document.querySelector("#game-winner").style.display = "flex";
+    }
+  }
 
-
+  showInstructions() {
+    const instructionsContainer= document.querySelector("#instructions-container");
+    if (instructionsContainer.style.display === "none") {
+      instructionsContainer.style.display = "block";
+    } else {
+      instructionsContainer.style.display = "none";
+    }
+  }
 } 
